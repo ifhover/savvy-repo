@@ -1,0 +1,53 @@
+---
+globs: apps/server/**/*.ts
+---
+
+# Server Development Guidelines
+
+## Architecture
+
+The server uses Hono framework with a modular structure:
+
+- **Entry Point**: [apps/server/src/index.ts](mdc:apps/server/src/index.ts) - Main server setup
+- **API Routes**: [apps/server/src/api.ts](mdc:apps/server/src/api.ts) - Central API configuration
+- **Modules**: `src/modules/` - Feature-based modules with router, service, and type files
+- **Database**: [apps/server/src/db/schema.ts](mdc:apps/server/src/db/schema.ts) - Drizzle ORM schema
+
+## Module Structure
+
+Each module should follow this pattern:
+
+```
+modules/[feature]/
+├── router.ts    # Hono routes and handlers
+├── service.ts   # Business logic
+└── type.ts      # TypeScript types (if needed)
+```
+
+## Error Handling
+
+- Use [BusinessError](mdc:apps/server/src/utils/exception.ts) for business logic errors
+- Global error handler in [api.ts](mdc:apps/server/src/api.ts) handles all errors
+- Return consistent JSON responses using [ApiResponse](mdc:apps/server/src/utils/apiResponse.ts)
+
+## Database
+
+- Use Drizzle ORM with PostgreSQL
+- Schema defined in [apps/server/src/db/schema.ts](mdc:apps/server/src/db/schema.ts)
+- Generate migrations with `pnpm db:generate`
+- Apply migrations with `pnpm db:migrate`
+
+## Authentication
+
+- JWT token-based authentication
+- Middleware in [apps/server/src/middleware/auth.ts](mdc:apps/server/src/middleware/auth.ts)
+- Password hashing with bcrypt
+- Token storage in database with expiration
+
+## Code Style
+
+- Use TypeScript with strict mode
+- Import shared types from `@repo/type`
+- Use semicolons consistently
+- Prefer async/await over Promises
+- Use Zod for request validation

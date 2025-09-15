@@ -1,0 +1,41 @@
+---
+globs: packages/type/**/*.ts
+---
+
+# Shared Types Package Guidelines
+
+## Package Structure
+
+The `@repo/type` package contains shared TypeScript types and interfaces used across the monorepo:
+
+- **Main Export**: [packages/type/src/index.ts](mdc:packages/type/src/index.ts) - Re-exports all modules
+- **API Types**: `src/api/` - API request/response types
+- **Common Types**: `src/common/` - Shared utility types and enums
+
+## Type Organization
+
+- **API Types**: Organized by feature (user, captcha, menu)
+- **Common Types**: Shared enums, status codes, and utility types
+- **Exports**: All types are re-exported from the main index file
+
+## Usage Guidelines
+
+- Import types using: `import { TypeName } from "@repo/type"`
+- Use workspace reference: `"@repo/type": "workspace:repo@*"`
+- Keep types focused and specific to avoid circular dependencies
+- Use enums for fixed value sets (Status, VerifyCodeChannel, etc.)
+
+## Type Definitions
+
+- **ApiResponse**: Standard API response wrapper with status, message, and data
+- **Status**: Enum for API response status codes
+- **VerifyCodeChannel**: Enum for verification code delivery channels
+- **VerifyCodeBizType**: Enum for verification code business types
+
+## Best Practices
+
+- Use TypeScript interfaces for object shapes
+- Use enums for fixed value sets
+- Export types individually for better tree-shaking
+- Keep types in sync between frontend and backend
+- Use generic types for reusable patterns

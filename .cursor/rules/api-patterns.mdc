@@ -1,0 +1,55 @@
+---
+description: API development patterns and conventions
+---
+
+# API Development Patterns
+
+## Request/Response Structure
+
+All API endpoints follow a consistent pattern:
+
+### Response Format
+
+```typescript
+interface ApiResponse<T> {
+  status: Status;
+  message: string;
+  data: T | null;
+}
+```
+
+### Status Codes
+
+- `Status.Success` (0) - Successful operation
+- `Status.Unauthorized` (-1) - Authentication required
+- `Status.Error` (-2) - General error
+
+## Error Handling
+
+- Use [BusinessError](mdc:apps/server/src/utils/exception.ts) for business logic errors
+- Global error handler in [api.ts](mdc:apps/server/src/api.ts) catches all errors
+- Return appropriate HTTP status codes with consistent JSON responses
+
+## Authentication
+
+- JWT tokens in `Authorization: Bearer <token>` header
+- Token validation in [auth middleware](mdc:apps/server/src/middleware/auth.ts)
+- Automatic token refresh handling on frontend
+
+## Request Validation
+
+- Use Zod schemas for request validation
+- Validate all input data before processing
+- Return clear error messages for validation failures
+
+## CORS Configuration
+
+- CORS enabled for all routes in [api.ts](mdc:apps/server/src/api.ts)
+- Configure appropriate origins for production
+
+## API Client (Frontend)
+
+- Centralized request utility in [apps/web/src/utils/request.ts](mdc:apps/web/src/utils/request.ts)
+- Automatic token injection
+- Error handling with user-friendly messages
+- Automatic redirect on authentication failure

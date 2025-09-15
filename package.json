@@ -1,0 +1,20 @@
+{
+  "name": "savvy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "pnpm --parallel --filter web --filter server dev",
+    "web:dev": "pnpm --parallel --filter web dev",
+    "server:dev": "pnpm --parallel  --filter server dev",
+    "db:generate": "pnpm --filter server db:generate",
+    "db:migrate": "pnpm --filter server db:migrate"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.11.1",
+  "devDependencies": {
+    "prettier": "^3.6.2"
+  }
+}

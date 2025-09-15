@@ -1,0 +1,60 @@
+---
+globs: apps/web/**/*.ts,apps/web/**/*.tsx
+---
+
+# Web Development Guidelines
+
+## Framework & Libraries
+
+- **Next.js 15** with App Router
+- **React 19** with modern hooks
+- **Ant Design v5** for UI components
+- **Tailwind CSS v4** for styling
+- **SWR** for data fetching
+- **TypeScript** with strict mode
+
+## Project Structure
+
+- **App Router**: `src/app/` - Next.js 15 app directory structure
+- **Components**: `src/components/` - Reusable React components
+- **API Layer**: `src/api/` - API client functions
+- **Hooks**: `src/hooks/` - Custom React hooks
+- **Utils**: `src/utils/` - Utility functions
+- **Middleware**: [apps/web/src/middleware.ts](mdc:apps/web/src/middleware.ts) - Next.js middleware
+
+## Component Guidelines
+
+- Use functional components with hooks
+- Prefer TypeScript interfaces over types for props
+- Use Ant Design components as base UI elements
+- Customize Ant Design theme in [apps/web/src/app/layout.tsx](mdc:apps/web/src/app/layout.tsx)
+- Use [AntdNextRegistry](mdc:apps/web/src/components/systeam/AntdNextRegistry.tsx) for SSR compatibility
+
+## Data Fetching
+
+- Use SWR for client-side data fetching
+- API functions in `src/api/` directory
+- Request utility in [apps/web/src/utils/request.ts](mdc:apps/web/src/utils/request.ts)
+- Automatic token handling and error management
+
+## Styling
+
+- Use Tailwind CSS for utility-first styling
+- Custom CSS variables for theming in layout
+- Ant Design components for complex UI elements
+- Responsive design with Tailwind breakpoints
+
+## Authentication
+
+- JWT token stored in cookies
+- Server-side token handling in [apps/web/src/utils/token.ts](mdc:apps/web/src/utils/token.ts)
+- Protected routes using middleware
+- Automatic redirect to login on token expiration
+
+## Code Style
+
+- Use TypeScript with strict mode
+- Import shared types from `@repo/type`
+- Use semicolons consistently
+- Prefer named exports over default exports
+- Use React 19 features (useMemo, useCallback when appropriate)

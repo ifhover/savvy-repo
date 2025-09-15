@@ -1,0 +1,56 @@
+---
+globs: apps/server/src/db/**/*.ts,apps/server/drizzle.config.ts
+---
+
+# Database & ORM Guidelines
+
+## Drizzle ORM Setup
+
+- **Configuration**: [apps/server/drizzle.config.ts](mdc:apps/server/drizzle.config.ts) - Drizzle Kit configuration
+- **Schema**: [apps/server/src/db/schema.ts](mdc:apps/server/src/db/schema.ts) - Database schema definitions
+- **Connection**: [apps/server/src/db/db.ts](mdc:apps/server/src/db/db.ts) - Database connection setup
+
+## Schema Guidelines
+
+- Use PostgreSQL as the database
+- Define tables using `pgTable` from `drizzle-orm/pg-core`
+- Use UUID v7 for primary keys with `v7()` default function
+- Include `created_at` and `updated_at` timestamps on all tables
+- Use `$onUpdate(() => new Date())` for automatic `updated_at` updates
+
+## Table Structure
+
+Current tables:
+
+- **user**: User accounts with email and hashed password
+- **token**: JWT tokens with expiration and user reference
+- **verify_code**: Verification codes for email/SMS with business type
+- **menu**: Navigation menu items with hierarchical structure
+
+## Migration Management
+
+- Generate migrations: `pnpm db:generate`
+- Apply migrations: `pnpm db:migrate`
+- Migration files stored in `apps/server/drizzle/`
+- Always review generated migrations before applying
+
+## Relations
+
+- Use Drizzle relations for foreign key relationships
+- Define relations in the same schema file
+- Use proper naming: `[tableName]Relations`
+
+## Type Safety
+
+- Import types from `@repo/type` for enum values
+- Use `$type<EnumType>()` for enum columns
+- Leverage TypeScript inference for query results
+- Use proper typing for all database operations
+
+## Best Practices
+
+- Always use transactions for multi-table operations
+- Use prepared statements for repeated queries
+- Index frequently queried columns
+- Use proper constraints and foreign keys
+- Keep schema changes backward compatible when possible

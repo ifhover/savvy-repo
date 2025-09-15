@@ -1,0 +1,53 @@
+---
+description: Development workflow and best practices
+---
+
+# Development Workflow
+
+## Getting Started
+
+1. Install dependencies: `pnpm install`
+2. Set up environment variables for both apps
+3. Run database migrations: `pnpm db:migrate`
+4. Start development: `pnpm dev`
+
+## Environment Setup
+
+- **Server**: Environment variables in `.env` files
+- **Web**: Environment variables with `NEXT_PUBLIC_` prefix for client-side
+- **Database**: PostgreSQL connection configuration
+
+## Code Quality
+
+- **TypeScript**: Strict mode enabled for all packages
+- **Prettier**: Code formatting with consistent style
+- **Linting**: ESLint configuration for code quality
+- **Type Safety**: Shared types between frontend and backend
+
+## Git Workflow
+
+- Use conventional commit messages
+- Create feature branches for new development
+- Test changes locally before pushing
+- Keep commits focused and atomic
+
+## Testing Strategy
+
+- Unit tests for business logic
+- Integration tests for API endpoints
+- E2E tests for critical user flows
+- Database migration testing
+
+## Deployment
+
+- **Build**: `pnpm build` for production builds
+- **Database**: Run migrations before deployment
+- **Environment**: Ensure all environment variables are set
+- **Monitoring**: Set up logging and error tracking
+
+## Performance
+
+- Use SWR for efficient data fetching
+- Implement proper caching strategies
+- Optimize database queries
+- Use Next.js optimization features

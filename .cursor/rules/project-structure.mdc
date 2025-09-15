@@ -1,0 +1,38 @@
+---
+alwaysApply: true
+---
+
+# Project Structure Guide
+
+This is a monorepo using pnpm workspaces with the following structure:
+
+## Workspace Organization
+
+- **Root**: [package.json](mdc:package.json) - Contains workspace scripts and pnpm configuration
+- **Server App**: `apps/server/` - Hono-based API server with TypeScript
+- **Web App**: `apps/web/` - Next.js 15 application with React 19 and Ant Design
+- **Shared Types**: `packages/type/` - Shared TypeScript types and interfaces
+
+## Key Technologies
+
+- **Package Manager**: pnpm with workspace support
+- **Backend**: Hono framework, Drizzle ORM, PostgreSQL
+- **Frontend**: Next.js 15, React 19, Ant Design v5, Tailwind CSS
+- **Database**: PostgreSQL with Drizzle ORM migrations
+- **Authentication**: JWT tokens with bcrypt password hashing
+
+## Development Commands
+
+- `pnpm dev` - Run both server and web in parallel
+- `pnpm web:dev` - Run only web application
+- `pnpm server:dev` - Run only server application
+- `pnpm db:generate` - Generate database migrations
+- `pnpm db:migrate` - Apply database migrations
+
+## File Naming Conventions
+
+- Use kebab-case for file and directory names
+- TypeScript files use `.ts` extension
+- React components use `.tsx` extension
+- Database schema files are in `src/db/`
+- API routes are organized in `src/modules/`

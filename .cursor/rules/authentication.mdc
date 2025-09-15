@@ -1,0 +1,46 @@
+---
+description: Authentication and authorization patterns
+---
+
+# Authentication & Authorization
+
+## JWT Token System
+
+- **Token Storage**: Database table with user reference and expiration
+- **Token Generation**: UUID v7 for token IDs
+- **Expiration**: Configurable expiration time
+- **Refresh**: Automatic token refresh on frontend
+
+## Password Security
+
+- **Hashing**: bcrypt for password hashing
+- **Salt Rounds**: Use appropriate bcrypt rounds (default: 12)
+- **Validation**: Strong password requirements
+
+## Frontend Authentication
+
+- **Token Storage**: Cookies for persistence
+- **Server-Side**: Server-side token handling in [apps/web/src/utils/token.ts](mdc:apps/web/src/utils/token.ts)
+- **Client-Side**: Automatic token injection in API requests
+- **Expiration Handling**: Automatic redirect to login on token expiration
+
+## Protected Routes
+
+- **Middleware**: [apps/web/src/middleware.ts](mdc:apps/web/src/middleware.ts) for route protection
+- **Server-Side**: Auth middleware in [apps/server/src/middleware/auth.ts](mdc:apps/server/src/middleware/auth.ts)
+- **Redirects**: Automatic redirect to login with message parameter
+
+## Verification Codes
+
+- **Channels**: Email and SMS support
+- **Business Types**: Different code types for various operations
+- **Expiration**: Time-based expiration
+- **Usage Tracking**: Track when codes are used
+
+## Security Best Practices
+
+- Never log sensitive information
+- Use HTTPS in production
+- Implement rate limiting for sensitive endpoints
+- Validate all inputs
+- Use secure cookie settings
